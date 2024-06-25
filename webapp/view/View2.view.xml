@@ -1,0 +1,87 @@
+<mvc:View
+    controllerName="sap.kt.demo.piechart2.controller.View2"
+	xmlns="sap.m"
+	xmlns:g="sap.f"
+	xmlns:com="sap.suite.ui.commons"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:smartField="sap.ui.comp.smartfield"
+	xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:layout="sap.ui.layout"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:m="sap.m" >
+	<Page id="page" title="{i18n>title}">
+		<content>
+			<VBox height="25rem" class="sapUiSmallMargin">
+							<com:ChartContainer
+                                id="chartContainer"
+                                showFullScreen="true"
+                                showPersonalization="false"
+                                autoAdjustHeight="false"
+                                contentChange="attachContentChange">
+								<com:dimensionSelectors>
+									<!-- <Title text="Users Types to be license Optimized" titleStyle="H4" /> -->
+								</com:dimensionSelectors>
+								<com:content>
+									<com:ChartContainerContent>
+										<com:content>
+											<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
+                                                height='21rem' width="40rem" vizType='bar' selectData="onSelectedData" >
+												<viz:dataset>
+													<viz.data:FlattenedDataset data="{model>/chartData}"  >
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="LIC Type"
+                                                                value="{model>StoreName}" />
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<viz.data:MeasureDefinition name="Count"
+                                                                value="{model>Revenue}" />
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
+                                                        values="Count" />
+													<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension"
+                                                        values="LIC Type" />
+												</viz:feeds>
+												<viz:dependents>
+													<viz:Popover id="idPopOver"></viz:Popover>
+												</viz:dependents>
+											</viz:VizFrame>
+										</com:content>
+									</com:ChartContainerContent>
+								</com:content>
+							</com:ChartContainer>
+						</VBox>
+
+            
+            <m:Table id="cartTable" items="{path: 'model>/chartData'}">
+                <m:columns>
+                    <m:Column demandPopin="true" minScreenWidth="Tablet">
+                        <Text text="StoreName"/>
+                    </m:Column>
+                    <m:Column >
+                        <Text text="Revenue"/>
+                    </m:Column>
+                    
+                </m:columns>
+                <m:items>
+                    <m:ColumnListItem>
+                        <m:cells>
+                            <m:Text text="{model>StoreName}"/>
+                            <m:Text text="{model>Revenue}"/>
+                            
+                        </m:cells>
+                    </m:ColumnListItem>
+                   
+                </m:items>
+            </m:Table>
+		</content>
+	</Page>
+</mvc:View>

@@ -1,0 +1,8 @@
+{
+    "chartData": [
+        { "StoreName": "Store A", "Revenue": 120000 },
+        { "StoreName": "Store B", "Revenue": 95000 },
+        { "StoreName": "Store C", "Revenue": 80000 },
+        { "StoreName": "Store D", "Revenue": 60000 }
+    ]
+}
